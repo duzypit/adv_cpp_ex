@@ -3,6 +3,7 @@
 Opis przygotowania google test: https://github.com/duzypit/sw2/blob/master/unit_testing/gmock-howto.txt
 
 todo:
+
     Pointerz:
         03: nie jestem pewien czy o to chodziło. Na zajęciach pojawił się link ze stackoverflow, gdzie było podobne zagadnienie zrobione nieco inaczej.
 
