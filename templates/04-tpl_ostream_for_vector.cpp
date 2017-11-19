@@ -22,5 +22,8 @@ std::ostream& operator<< (
 
 int main(){
     std::vector<char> charz {'a','b','c'};
+    std::vector<int> intz {1,2,3};
     std::cout << charz << std::endl;
+    std::cout << intz << std::endl;
+    return 0;
 }
