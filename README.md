@@ -12,3 +12,4 @@ todo:
         02: jak zrobić begin(), end()? na githubie super-teachers nie ma wymienionych metod w szkielecie klasy, tak jakby zostały pominięte
         02: musiałem wypełnić std::array wartością -1 bo kompilator przy inicjalizacji wkładał 0 i testy nie przechodziły ;)
         05: nie wiem jak to zrobić
+        06: problem kompilator traktuje obiekt zwrócony jako funkcję
