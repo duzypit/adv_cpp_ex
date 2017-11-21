@@ -20,14 +20,15 @@ template<typename T>
 class String{
 public:
     //ctor
-    String(){}
+    String(){
+        this -> size = 0;
+    }
 
     //can be construced from const char*
     String(const char* str) {
         this -> size = 0;
         while (str[this->size] != '\0') this->size++;
         std::copy(str, str+this->size, std::back_inserter(this->_data));
-        //std::copy(_data.begin(), str, str + this -> size);
     }
 
     //can be constructed from std::string
@@ -54,10 +55,7 @@ public:
     }
 
     String& operator +=(const std::string& s){
-        //for (T c : s){
         std::copy(s.begin(), s.end(), std::back_inserter(this ->_data));
-
-        //}
         this -> size += s.size();
         return *this;
     }
@@ -66,28 +64,27 @@ public:
         return std::string(this->_data.begin(), this->_data.end()).c_str();
     }
 
+    const std::string str() const {
+        return std::string(this->_data.begin(), this->_data.end());
+    }
+
     std::size_t dataHash() const{
         return std::hash<std::string>{} (std::string(this->_data.begin(), this->_data.end()));
     }
 
-    friend String<T>& operator+(const String<T> lhs, const String<T>& rhs){
-        String temp = lhs;
-        //std::cout << "lhs cstr: " << lhs.c_str() << std::endl;
-        temp += std::string(rhs.c_str());
-        //std::cout << "tmp after += " << temp.c_str() << std::endl;
-        return temp;
+    friend String<T> operator+ (const String<T>& lhs, const String<T>& rhs){
+        String<T> res(std::string(lhs._data.begin(), lhs._data.end()));
+        res += std::string(rhs._data.begin(), rhs._data.end());
+        return res;
     }
-
 
 private:
     size_t size;
     std::vector<T> _data;
 };
 
-
 template <typename T>
 bool operator== (const String<T>& lhs, const String<T>& rhs){
-    //std::cout << "test: "<< lhs.c_str() << " " << rhs.c_str() << std::endl;
     return (lhs.dataHash() == rhs.dataHash());
 }
 
@@ -130,8 +127,8 @@ TEST(String, eqOperator){
 TEST(String, addOperator){
     String<char> a("te");
     String<char> b("st");
-    String<char> c = a+b;
-    EXPECT_EQ("test", c.c_str()) << "Add operator failed";
+    String<char> c(a+b);
+    EXPECT_STREQ("test", c.c_str()) << "Add operator failed";
 }
 
 int main(int argc, char **argv) {
