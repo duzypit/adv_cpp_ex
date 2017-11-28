@@ -12,3 +12,7 @@ todo:
         02: musiałem wypełnić std::array wartością -1 bo kompilator przy inicjalizacji wkładał 0 i testy nie przechodziły ;)
         05: nie wiem jak to zrobić
         06: problem kompilator traktuje obiekt zwrócony jako funkcję
+        08: brakuje:
+            - specializacja dla bool (nie działa)
+            - copy ctor
+            - operator+
