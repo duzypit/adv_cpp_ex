@@ -1,6 +1,6 @@
 #include <iostream>
 #include <array>
-#include <type_traits>
+#include <vector>
 /*
 Excercise
 implement Matrix<N, M, T> (order is random here!)
@@ -36,7 +36,7 @@ public:
 	Matrix(const Matrix<N1,M1,T1>&) {}b
 */
 
-/*
+
     T operator[](int index) const{
         return this->_data[index];
     }
@@ -44,15 +44,15 @@ public:
 	T& operator[](int index){
         return this->_data[index];
     }
-*/
-/*    T operator() (std::size_t row, std::size_t col) const{
+
+    T operator() (std::size_t row, std::size_t col) const{
         if(row <= this->_rows && col <= this->_cols){
             return this->_data[this->_cols *row + col];
         } else {
             throw std::runtime_error("wrong boundariew");
         }
     }
-*/
+
     T& operator() (const std::size_t row, const std::size_t col){
        if(row <= this->_rows && col <= this->_cols){
             return this->_data[this->_cols *row + col];
@@ -63,6 +63,7 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& os, const Matrix<N,M,T>& mat){
             std::size_t currentCol = 0;
+            //tutaj wyłącznie for(;;) nie range loop
             for(auto v : mat._data){
                 currentCol++;
                 if(currentCol > mat._cols){
@@ -97,6 +98,7 @@ private:
     std::size_t _rows = N;
     std::size_t _cols = M;
     std::array<T, (N*M)> _data;
+    //std::vector<T> _data;
 };
 
 
@@ -123,9 +125,11 @@ int main(){
     Matrix<1, 1, bool> boolz;
     //boolz.printData();
     Matrix <0,0,int> intz;
-    //Matrix<2,2, int> proper;
+    Matrix<2,2, int> proper;
     //proper.fill(10);
     //
+    proper[0] = 0;
+    std::cout << " Elem 0 proper: " << proper[0] << std::endl;
     //proper(0,0) = 0;
     //proper(0,1) = 1;
     //proper(1,0) = 2;
