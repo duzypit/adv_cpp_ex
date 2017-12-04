@@ -1,6 +1,6 @@
 #include <iostream>
-#include <array>
 #include <type_traits>
+#include <vector>
 /*
 Excercise
 implement Matrix<N, M, T> (order is random here!)
@@ -22,13 +22,8 @@ template<std::size_t N, std::size_t M, typename T>
 class Matrix{
 public:
 	//default ctor
-	Matrix(){
+	Matrix() : _data(N*M) {
         std::cout << "base class w/o spec" << std::endl;
-    }
-
-    //ctor & fill
-    Matrix(T val) : Matrix() {
-        this->fill(val);
     }
 
 	//copy ctor
@@ -36,7 +31,7 @@ public:
 	Matrix(const Matrix<N1,M1,T1>&) {}b
 */
 
-/*
+
     T operator[](int index) const{
         return this->_data[index];
     }
@@ -44,15 +39,15 @@ public:
 	T& operator[](int index){
         return this->_data[index];
     }
-*/
-/*    T operator() (std::size_t row, std::size_t col) const{
+
+    T operator() (std::size_t row, std::size_t col) const{
         if(row <= this->_rows && col <= this->_cols){
             return this->_data[this->_cols *row + col];
         } else {
             throw std::runtime_error("wrong boundariew");
         }
     }
-*/
+
     T& operator() (const std::size_t row, const std::size_t col){
        if(row <= this->_rows && col <= this->_cols){
             return this->_data[this->_cols *row + col];
@@ -83,10 +78,13 @@ public:
 
 	}
 */
+
+    //for testing only
     void fill(T val){
         std::fill(this->_data.begin(), this->_data.begin()+(N*M), val);
     }
 
+    //for testing only
     void printData(){
         for(auto v : this->_data){
             std::cout << v << " ";
@@ -96,9 +94,18 @@ public:
 private:
     std::size_t _rows = N;
     std::size_t _cols = M;
-    std::array<T, (N*M)> _data;
+    std::vector<T> _data;
 };
 
+template<std::size_t N, std:: size_t M>
+class Matrix<N, M, bool>{
+public:
+	Matrix() {
+		static_assert(true, "Bool type is not supported!");
+        std::cout << "Bool type is not supported!" << std::endl;
+
+	}
+};
 
 template<typename T>
 class Matrix<0,0, T>{
@@ -109,40 +116,25 @@ public:
 	}
 };
 
-template<int N, int M>
-class Matrix<N, M,bool>{
-public:
-	Matrix() {
-		static_assert(true, "Bool type is not supported!");
-        std::cout << "Bool type is not supported!" << std::endl;
-
-	}
-};
-
 int main(){
-    Matrix<1, 1, bool> boolz;
-    //boolz.printData();
+    //spec for 0,0
     Matrix <0,0,int> intz;
-    //Matrix<2,2, int> proper;
-    //proper.fill(10);
-    //
-    //proper(0,0) = 0;
-    //proper(0,1) = 1;
-    //proper(1,0) = 2;
-    //proper(1,1) = 3;
-    //std::cout << proper << std::endl;
-    //proper.printData();
-/*
-    std::vector<int> test;
-    test.reserve(2);
-    test[1] = 5;
-    test[0] = 0;
-    //std::fill(test.begin(), test.end(), 2);
-    //std::cout << test[1] << std::endl;
-    for(auto &v : test){
-        std::cout << v << " " << std::endl;
-    }
-    std::cout << "test" << std::endl;
-*/
+    //spec for bool - error, spec don't work
+    Matrix<1, 1, bool> boolz;
+
+    Matrix<2,2, int> proper;
+    //indirect use of operator[]
+    proper(0,0) = 0;
+    proper(0,1) = 1;
+    proper(1,0) = 2;
+    proper(1,1) = 3;
+
+    //operator<<
+    std::cout << proper << std::endl;
+
+
+
+
+
     return 0;
 }

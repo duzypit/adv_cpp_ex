@@ -33,16 +33,24 @@ public:
     }
 
     //jaki typ ma byc zwracany?
-    //prowadzący pominął begin/end w kodzie na githubie
-    /* begin() {
-        if(heap) {
+    /*
+    T* begin() {
+        if(this->_onHeap) {
             return this->_heap.begin();
         } else {
             return this->_stack.begin();
         }
-    }*/
+    }
 
     //end() - to samo jak wyżej
+    T* end() {
+        if(this->_onHeap) {
+            return this->_heap.end();
+        } else {
+            return this->_stack.end();
+        }
+    }
+*/
 
     T& operator[](std::size_t index){
         if(this -> _onHeap){
@@ -97,6 +105,12 @@ TEST(Array, heap_simple) {
     EXPECT_EQ(heap[5], 10);
 }
 
+TEST(Array, heap_begin){
+    Array<10, int, true> heap;
+
+    heap[0] = 1;
+    EXPECT_EQ(heap.begin(), 5);
+}
 
 int main(int argc, char **argv) {
 
