@@ -4,6 +4,10 @@ Opis przygotowania google test: https://github.com/duzypit/sw2/blob/master/unit_
 
 todo:
 
+    Containers:
+        03: brak rozwiązania
+        04: brak rozwiązania
+
     Pointerz:
         03: nie jestem pewien czy o to chodziło. Na zajęciach pojawił się link ze stackoverflow, gdzie było podobne zagadnienie zrobione nieco inaczej.
 
@@ -17,3 +21,5 @@ todo:
             ~~- nie działa implementacja na std::vector~~
             - copy ctor
             - operator+
+
+
