@@ -7,6 +7,8 @@ todo:
     Containers:
         03: brak rozwiązania
         04: brak rozwiązania
+        05: brak rozwiazania
+        06: brak rozwiazania
 
     Pointerz:
         03: nie jestem pewien czy o to chodziło. Na zajęciach pojawił się link ze stackoverflow, gdzie było podobne zagadnienie zrobione nieco inaczej.
