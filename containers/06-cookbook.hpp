@@ -2,20 +2,23 @@
 #define COOKBOOK_HPP_QBXUGV7S
 #include <string>
 #include <unordered_map>
+#include <list>
+#include <vector>
 
 namespace cooking {
 
 //typedef double title;
 typedef std::string Title;
 
-typedef double string;
-typedef float recipeList;
+//typedef double string;
+//typedef float recipeList;
 
-typedef float keywords;
+//typedef float keywords;
+typedef std::vector<std::string> keywords;
 typedef double cost_t;
 
 struct Ingredient {
-    string name;
+    std::string name;
     double quantity;
 };
 
@@ -36,16 +39,31 @@ struct Recipe {
 
 };
 
+typedef std::list<Recipe> recipeList;
+
 struct Cookbook {
-    void addRecipe(Recipe, keywords = keywords{});
-    //! Fast O(logN) lookup
-    recipeList findByKeywords(keywords);
+    void addRecipe(Recipe, keywords = keywords{}){
+
+    }
+    //! Fast O(logN) lookup - MAP!
+    recipeList findByKeywords(keywords){
+        recipeList tmp;
+        return tmp;
+    }
 
     //! Search all recipes that can be created with a given recipes
-    recipeList search(ingredients_t ingreds);
+    recipeList search(ingredients_t ingreds){
+        recipeList tmp;
+        return tmp;
+    }
 
-    //! fast O(logN) lookup
-    recipeList findRecipes(Title);
+    //! fast O(logN) lookup - MAP!
+    recipeList findRecipes(Title){
+        recipeList tmp;
+        return tmp;
+    }
+
+    std::map _data;
 };
 
 }  // namespace cooking

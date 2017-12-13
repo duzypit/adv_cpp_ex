@@ -25,8 +25,14 @@ Cookbook:
 
 
 //template <typename T>
-cooking::cost_t cost(cooking::Recipe r) {
-    return r.cost();
+cooking::cost_t cost(cooking::recipeList rl) {
+    //sum of all costs in rl;
+    cost_t tmpCosts = 0;
+    for(auto& r : rl){
+        tmpCosts += r.cost();
+    }
+
+    return tmpCosts;
 }
 
 TEST(Cookbook, add_recipe) {
