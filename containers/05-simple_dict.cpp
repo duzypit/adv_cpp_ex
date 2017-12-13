@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 #include <string>
+#include <algorithm>
+//compile with flags -pthread -lgtest
 
 //http://slides.com/uczelnia_bt_kw/containers#/13
 /*
@@ -19,10 +21,29 @@ struct Dictionary {
 
 struct Dictionary {
     using word = std::string;
-    void addWord(const word& w) {}
-    void remove(const word& w) {}
+    void addWord(const word& w) {
+        _data.insert(toLower(w));
+    }
+    void removeWord(const word& w) {
+        _data.erase(toLower(w));
+    }
 
-    bool spell(const word& w) { return false;}
+    bool spell(const word& w) const noexcept {
+
+        if (_data.find(toLower(w)) == _data.end()) {
+            return false;
+        }
+        return true;
+    }
+
+private:
+    std::string toLower(const word& w) const{
+        std::string tmp (w);
+        std::transform(tmp.begin(), tmp.end(), tmp.begin(), [](unsigned char c) {return std::tolower(c);});
+        return tmp;
+
+    }
+    std::set<std::string> _data;
 };
 
 TEST(Dictionary, add_word) {
