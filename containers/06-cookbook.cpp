@@ -8,12 +8,12 @@
 
 #include "06-cookbook.hpp"
 
+using namespace cooking;
+
 //http://slides.com/uczelnia_bt_kw/containers#/13/1
 //
 /*
-
 excercise
-
 Cookbook:
 
     data structure that holds a number of recipes
@@ -21,22 +21,23 @@ Cookbook:
     fast look-up by title and keywords! (one keyword)
     recipes sorted by sum of quantity of ingridients
     Recipe is versioned: recipes with same title are considered different versions of the same recipe
-
 */
 
 
-template <typename T>
-cooking::cost_t cost(cooking::recipeList&) {}
+//template <typename T>
+cooking::cost_t cost(cooking::Recipe r) {
+    return r.cost();
+}
 
 TEST(Cookbook, add_recipe) {
-    /*
-      Cookbook cb;
-      Recipe budyn { "Budyn "};
-      budyn.ingreds = { {"mleko", "50" }, {"masło", "100"} };
-      cb.addRecipe(budyn);
-      ASSERT_EQ(cb.findRecipes("Budyn").size(), 1);
-      EXPECT_EQ(cost(cb.findRecipes("Budyn")), 150 );
-       */
+
+    Cookbook cb;
+    Recipe budyn { "Budyn "};
+    budyn.ingreds = { {"mleko", "50" }, {"masło", "100"} };
+    cb.addRecipe(budyn);
+    ASSERT_EQ(cb.findRecipes("Budyn").size(), 1);
+    EXPECT_EQ(cost(cb.findRecipes("Budyn")), 150 );
+
 }
 
 TEST(Cookbook, different_version_of_recipe) {

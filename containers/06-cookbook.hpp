@@ -1,9 +1,13 @@
 #ifndef COOKBOOK_HPP_QBXUGV7S
 #define COOKBOOK_HPP_QBXUGV7S
+#include <string>
+#include <unordered_map>
 
 namespace cooking {
 
-typedef double title;
+//typedef double title;
+typedef std::string Title;
+
 typedef double string;
 typedef float recipeList;
 
@@ -15,11 +19,20 @@ struct Ingredient {
     double quantity;
 };
 
-typedef float ingredients_t;
+//typedef float ingredients_t;
+typedef std::unordered_map<std::string, std::string> ingredients_t;
 
 struct Recipe {
+    Recipe(const char* t) : title(t){};
+    Title title;
     ingredients_t ingreds;
-    cost_t cost() const;
+    cost_t cost() const{
+        cost_t tmp = 0;
+        for(auto& v : ingreds){
+            tmp += std::stod(v.second);
+        }
+        return tmp;
+    }
 
 };
 
@@ -32,7 +45,7 @@ struct Cookbook {
     recipeList search(ingredients_t ingreds);
 
     //! fast O(logN) lookup
-    recipeList findRecipes(title);
+    recipeList findRecipes(Title);
 };
 
 }  // namespace cooking
