@@ -1,9 +1,4 @@
 #include <iostream>
-<<<<<<< HEAD
-#include <type_traits>
-=======
-#include <array>
->>>>>>> d86ec1d5606ee1b7d0ddef2de76e4f4e50073eef
 #include <vector>
 /*
 Excercise
@@ -99,12 +94,7 @@ public:
 private:
     std::size_t _rows = N;
     std::size_t _cols = M;
-<<<<<<< HEAD
     std::vector<T> _data;
-=======
-    std::array<T, (N*M)> _data;
-    //std::vector<T> _data;
->>>>>>> d86ec1d5606ee1b7d0ddef2de76e4f4e50073eef
 };
 
 template<std::size_t N, std:: size_t M>
@@ -129,7 +119,6 @@ public:
 int main(){
     //spec for 0,0
     Matrix <0,0,int> intz;
-<<<<<<< HEAD
     //spec for bool - error, spec don't work
     Matrix<1, 1, bool> boolz;
 
@@ -143,34 +132,7 @@ int main(){
     //operator<<
     std::cout << proper << std::endl;
 
-
-
-
-
-=======
-    Matrix<2,2, int> proper;
-    //proper.fill(10);
-    //
-    proper[0] = 0;
-    std::cout << " Elem 0 proper: " << proper[0] << std::endl;
-    //proper(0,0) = 0;
-    //proper(0,1) = 1;
-    //proper(1,0) = 2;
-    //proper(1,1) = 3;
-    //std::cout << proper << std::endl;
-    //proper.printData();
-/*
-    std::vector<int> test;
-    test.reserve(2);
-    test[1] = 5;
-    test[0] = 0;
-    //std::fill(test.begin(), test.end(), 2);
-    //std::cout << test[1] << std::endl;
-    for(auto &v : test){
-        std::cout << v << " " << std::endl;
-    }
-    std::cout << "test" << std::endl;
-*/
->>>>>>> d86ec1d5606ee1b7d0ddef2de76e4f4e50073eef
     return 0;
+
+
 }
