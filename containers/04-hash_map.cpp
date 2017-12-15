@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <functional>
+#include <utility>
 #include <gtest/gtest.h>
 
 //http://slides.com/uczelnia_bt_kw/containers#/9/11
@@ -14,25 +15,37 @@ uses std::map<> as a container
 Key is a custom Hash  {} type;
 Key is calculated from key
 */
-template <typename HashType>
+template <typename HashType, typename V>
 struct Hash {
-    using Int = HashType;
-    template <typename V>
-    Hash(V&& v);
+   // using Int = HashType;
+
+    Hash(V&& v){
+        _value = std::hash<V>{}(v);
+    };
 
    private:
-    Int _value;
+    HashType _value;
 };
 
 template <typename Data>
-using MyMap = std::map<Hash<std::int64_t>, Data>;
+using MyMap = std::map<Hash<std::int64_t, Data>, Data>;
 
 template <typename Data>
 struct HashMap {
-    Data& at();
-    void put(Data&&);
 
-    bool empty() { return true; }
+    Data& at(const MyMap<Data> h){
+        return _map.at(h);
+    }
+
+    //void put(Data&&);
+    bool insert (Data&& d){
+        Hash<std::int64_t, Data> h(d);
+        auto p = std::pair<Hash<std::int64_t,Data>, Data>(h, d);
+        auto r _map.insert(p);
+        return r.second;
+    }
+
+    bool empty() { return _map.empty(); }
 
     MyMap<Data> _map;
 };
@@ -44,6 +57,15 @@ TEST(MyMap, simple) {
 TEST(HashMap, simple) {
     HashMap<std::string> hm;
     EXPECT_TRUE(hm.empty());
+}
+
+TEST(HashMap, insert){
+
+    HashMap<std::string> hm;
+    hm.insert("Test");
+    EXPECT_FALSE(hm.empty());
+
+
 }
 
 int main(int argc, char** argv) {
