@@ -49,22 +49,22 @@ private:
 
 };
 //-std=c++11
-template<typename T, std::size_t N = 10, bool use_heap = false>
+/*template<typename T, std::size_t N = 10, bool use_heap = false>
 auto getArr() -> Array<T, N, use_heap> {
     return Array<T, N, use_heap>{};
 }
-
+*/
 //-std=c++14
 //the auto return type 'without trailing return type' is a c++14 feature
-//template<std::size_t N, typename T, bool use_heap>
-//auto getArr() {
-//    return Array<N, T, use_heap>();
-//}
+template<typename T, std::size_t N, bool use_heap>
+auto getArr() {
+    return Array<T, N, use_heap>();
+}
 
 
 
 int main() {
-    auto st = getArr<int>;
+    auto st = getArr<int,5,true>;
     //problem: base of member reference is a function; perhaps you ment to call it with no arguments?
     st.container();
 
