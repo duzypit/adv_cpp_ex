@@ -19,8 +19,8 @@ todo:
         05: nie wiem jak to zrobić
         06: problem kompilator traktuje obiekt zwrócony jako funkcję
         08: brakuje:
-            ~~- specializacja dla bool (nie działa)~~
-            ~~- nie działa implementacja na std::vector~~
+            ~~ - specializacja dla bool (nie działa) ~~
+            ~~ - nie działa implementacja na std::vector ~~
             - copy ctor
             - operator+
 
