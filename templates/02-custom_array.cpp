@@ -33,24 +33,23 @@ public:
     }
 
     //jaki typ ma byc zwracany?
-    /*
-    T* begin() {
+
+    auto begin() {
         if(this->_onHeap) {
-            return this->_heap.begin();
+            return *(_heap.begin());
         } else {
-            return this->_stack.begin();
+            return *(_stack.begin());
         }
     }
 
     //end() - to samo jak wyżej
-    T* end() {
+    auto end() {
         if(this->_onHeap) {
-            return this->_heap.end();
+            return *(_heap.end());
         } else {
-            return this->_stack.end();
+            return *(_stack.end());
         }
     }
-*/
 
     T& operator[](std::size_t index){
         if(this -> _onHeap){
@@ -108,7 +107,7 @@ TEST(Array, heap_simple) {
 TEST(Array, heap_begin){
     Array<10, int, true> heap;
 
-    heap[0] = 1;
+    heap[0] = 5;
     EXPECT_EQ(heap.begin(), 5);
 }
 
