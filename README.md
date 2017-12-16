@@ -1,6 +1,6 @@
 # adv_cpp_ex
 
-Opis przygotowania google test: https://github.com/duzypit/sw2/blob/master/unit_testing/gmock-howto.txt
+[Opis przygotowania google test] (https://github.com/duzypit/sw2/blob/master/unit_testing/gmock-howto.txt)
 
 todo:
 
