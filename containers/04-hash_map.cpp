@@ -15,43 +15,50 @@ uses std::map<> as a container
 Key is a custom Hash  {} type;
 Key is calculated from key
 */
-template <typename HashType, typename V>
+template <typename V>
 struct Hash {
    // using Int = HashType;
 
-    Hash(V&& v){
+    Hash(V& v){
         _value = std::hash<V>{}(v);
     };
 
-   private:
-    HashType _value;
+  // private:
+    std::int64_t _value;
 };
 
-template <typename Data>
-using MyMap = std::map<Hash<std::int64_t, Data>, Data>;
+template <typename T>
+struct cmp{
+    bool operator() (const Hash<T> lhs, const Hash<T> rhs) const {
+        return lhs._value < rhs._value;
+    }
+};
 
 template <typename Data>
 struct HashMap {
 
-    Data& at(const MyMap<Data> h){
+    Data& at(const std::map<Hash<Data>, Data> h){
         return _map.at(h);
     }
 
     //void put(Data&&);
-    bool insert (Data&& d){
-        Hash<std::int64_t, Data> h(d);
-        auto p = std::pair<Hash<std::int64_t,Data>, Data>(h, d);
-        auto r _map.insert(p);
-        return r.second;
+    bool insert (Data d){
+        Hash<Data> h(d);
+        auto result =  _map.insert(std::pair<Hash<Data>, Data>(h, d));
+        //_map.insert(p);
+        return result.second;
+
     }
 
     bool empty() { return _map.empty(); }
 
-    MyMap<Data> _map;
+
+    std::map<Hash<Data>, Data, cmp<Data>> _map;
+
 };
 
 TEST(MyMap, simple) {
-    MyMap<int> asd;
+    HashMap<int> asd;
     EXPECT_TRUE(asd.empty());
 }
 TEST(HashMap, simple) {
